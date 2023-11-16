@@ -9,21 +9,15 @@ class Directeur{
         $sql="SELECT * FROM directeur WHERE email=?";
         $PdoSt=$con->prepare($sql);
         $PdoSt->execute([$email]);
+        $directeur=$PdoSt->fetchObject(Directeur::class);
 
 
         if($PdoSt->rowCount()>0){
-        $directeur=$PdoSt->fetchObject(Directeur::class);
-
             if($directeur->password==$password)
-                    return $directeur;
+                     return $directeur;
             
         }
     return false;
     }
-    public function __toString(){
-        return $this->nom." ".$this->prenom;
-    }
-
-    
 }
 ?>
